@@ -1,0 +1,18 @@
+{
+  "cls_id": 2,
+  "sep_id": 1,
+  "mask_id": 4,
+  "mask_token": "<mask>",
+  "max_len": 1024,
+  "head_max_len": 256,
+  "option_max_tokens": 48,
+  "qtype_choice": 0,
+  "instructions": "Which answer best responds to `question`?",
+  "limits": {
+    "question": 2000,
+    "context": 4000,
+    "options": 12,
+    "option": 200,
+    "meaning": 300
+  }
+}

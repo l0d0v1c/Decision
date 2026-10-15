@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F2A44'/%3E%3Crect x='7' y='18' width='18' height='4' rx='2' fill='%23A97A1F'/%3E%3Crect x='7' y='10' width='11' height='4' rx='2' fill='%23E8EBEF'/%3E%3C/svg%3E">
+<title>Decision</title>
+<meta name="description" content="Un oracle qui tranche entre les cas que tu proposes, calculé dans ton navigateur par le modèle Laya multilingue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --stone: #E8EBEF;
+  --sheet: #F6F7F9;
+  --ink: #1F2A44;
+  --muted: #5E6779;
+  --line: #C6CCD6;
+  --brass: #A97A1F;
+  --brass-soft: #E7D3A6;
+  --error: #A23B2A;
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --stone: #131926; --sheet: #1B2232; --ink: #E4E8F0; --muted: #9AA3B5;
+    --line: #34405A; --brass: #D8A646; --brass-soft: #4A3B1C; --error: #E0806C;
+  }
+}
+:root[data-theme="dark"] {
+  --stone: #131926; --sheet: #1B2232; --ink: #E4E8F0; --muted: #9AA3B5;
+  --line: #34405A; --brass: #D8A646; --brass-soft: #4A3B1C; --error: #E0806C;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--stone); color: var(--ink);
+  font: 400 1rem/1.55 var(--sans);
+}
+main { max-width: 40rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
+h1 { font: 600 1rem/1.2 var(--sans); margin: 0 0 2.5rem; letter-spacing: .01em; }
+h1 span { color: var(--muted); font-weight: 400; }
+
+label.q { display: block; font-size: .875rem; color: var(--muted); margin-bottom: .5rem; }
+textarea, input[type=text] {
+  width: 100%; color: var(--ink); background: var(--sheet);
+  border: 1px solid var(--line); border-radius: 4px; font: inherit;
+}
+textarea:focus, input:focus, button:focus-visible {
+  outline: 2px solid var(--brass); outline-offset: 2px;
+}
+#question {
+  font: 400 1.6rem/1.3 var(--serif); padding: .9rem 1rem; min-height: 7.5rem; resize: vertical;
+}
+#context { padding: .7rem .9rem; min-height: 5.5rem; resize: vertical; margin-bottom: 1.6rem; }
+.examples { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .9rem; margin-bottom: 1.8rem; font-size: .875rem; color: var(--muted); }
+.examples button {
+  background: none; border: 0; padding: .2rem 0; color: var(--ink); cursor: pointer;
+  font: 500 .875rem var(--sans); text-decoration: underline; text-underline-offset: 3px;
+}
+
+fieldset { border: 0; padding: 0; margin: 2rem 0 0; }
+legend { font-size: .875rem; color: var(--muted); padding: 0; margin-bottom: .5rem; }
+.modes { display: flex; gap: .5rem; margin-bottom: .9rem; flex-wrap: wrap; }
+.modes button {
+  font: 500 .875rem/1 var(--sans); padding: .55rem .9rem; border-radius: 999px;
+  border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer;
+}
+.modes button[aria-pressed=true] { background: var(--ink); color: var(--stone); border-color: var(--ink); }
+#options { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+#options { gap: .7rem; }
+#options li { display: grid; grid-template-columns: 1fr auto; gap: .3rem .4rem; }
+#options input { padding: .55rem .75rem; }
+#options input.label { font-weight: 600; }
+#options input.label[readonly] { background: transparent; border-color: transparent; padding-left: 0; }
+#options .meaning-wrap { grid-column: 1; display: flex; align-items: baseline; gap: .5rem; }
+#options .meaning-wrap span { flex: none; font-size: .8125rem; color: var(--muted); }
+#options input.meaning { font-size: .875rem; padding: .45rem .7rem; }
+.hint { font-size: .8125rem; color: var(--muted); margin: 0 0 .7rem; }
+.remove {
+  flex: none; width: 2.4rem; border: 1px solid var(--line); border-radius: 4px;
+  background: transparent; color: var(--muted); cursor: pointer; font-size: 1.1rem;
+}
+.add {
+  margin-top: .6rem; background: none; border: 0; padding: .3rem 0; color: var(--ink);
+  font: 500 .875rem var(--sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+
+.consult {
+  margin-top: 2rem; width: 100%; padding: .95rem 1rem; border: 0; border-radius: 4px;
+  background: var(--ink); color: var(--stone); font: 600 1rem var(--sans); cursor: pointer;
+}
+.consult[disabled] { opacity: .6; cursor: progress; }
+#error { color: var(--error); margin: 1rem 0 0; min-height: 1.5em; font-size: .9375rem; }
+
+#verdict { margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 2rem; }
+#verdict[hidden] { display: none; }
+#verdict .asked { font: italic 400 1rem/1.4 var(--serif); color: var(--muted); margin: 0; }
+#answer {
+  font: 600 clamp(2.4rem, 9vw, 3.6rem)/1.05 var(--serif); margin: .6rem 0 1.8rem;
+  overflow-wrap: anywhere;
+}
+#ranking { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; }
+#ranking .row { display: flex; justify-content: space-between; gap: 1rem; font-size: .9375rem; }
+#ranking .pct { font-variant-numeric: tabular-nums; color: var(--muted); }
+#ranking .bar { height: 6px; background: var(--sheet); border-radius: 3px; margin-top: .3rem; overflow: hidden; }
+#ranking .fill { height: 100%; width: 0; background: var(--line); border-radius: 3px; transition: width .7s cubic-bezier(.2,.7,.2,1); }
+#ranking li:first-child .fill { background: var(--brass); }
+#ranking li:first-child .row { font-weight: 600; }
+.engine { margin: -1rem 0 2.2rem; padding: .9rem 1rem; border: 1px solid var(--line); border-radius: 4px; font-size: .875rem; color: var(--muted); }
+.engine p { margin: 0; }
+.engine.ready { border-color: transparent; padding: 0; }
+.load {
+  margin-top: .7rem; padding: .5rem .9rem; border: 1px solid var(--ink); border-radius: 4px;
+  background: transparent; color: var(--ink); font: 600 .875rem var(--sans); cursor: pointer;
+}
+.load[hidden] { display: none; }
+.progress { height: 4px; background: var(--sheet); border-radius: 2px; margin-top: .7rem; overflow: hidden; }
+.progress[hidden] { display: none; }
+#progress-fill { height: 100%; width: 0; background: var(--brass); transition: width .2s linear; }
+.note a { color: var(--ink); text-underline-offset: 2px; }
+.note { margin-top: 2rem; font-size: .8125rem; color: var(--muted); max-width: 34rem; }
+
+@media (prefers-reduced-motion: reduce) { #ranking .fill { transition: none; } }
+@media (max-width: 480px) { main { padding-top: 2rem; } #question { font-size: 1.35rem; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Decision <span>— pose une question, l'oracle tranche</span></h1>
+
+  <section class="engine" aria-live="polite">
+    <p id="engine-status">L'oracle tourne entièrement dans ton navigateur : rien de ce que tu écris
+      ne quitte ta machine. Il faut d'abord télécharger le modèle (335 Mo, une seule fois).</p>
+    <div class="progress" id="progress" hidden><div id="progress-fill"></div></div>
+    <button type="button" class="load" id="load">Télécharger le modèle</button>
+  </section>
+
+  <form id="form" novalidate>
+    <div class="examples" role="group" aria-label="Exemples">
+      <span>Essayer un exemple :</span>
+    </div>
+
+    <label class="q" for="context">Contexte</label>
+    <textarea id="context" maxlength="4000"
+      placeholder="Ce que l'oracle doit savoir : situation, contraintes, faits."></textarea>
+
+    <label class="q" for="question">Question</label>
+    <textarea id="question" required maxlength="2000"
+      placeholder="Dois-je accepter ce poste à l'autre bout de la ville ?"></textarea>
+
+    <fieldset>
+      <legend>Cas</legend>
+      <div class="modes" role="group" aria-label="Type de cas">
+        <button type="button" data-mode="yesno" aria-pressed="true">Oui / Non</button>
+        <button type="button" data-mode="custom" aria-pressed="false">Mes propres cas</button>
+      </div>
+      <p class="hint">Pour chaque cas, dis quand l'oracle doit le choisir. C'est ce critère qu'il pèse.</p>
+      <ul id="options"></ul>
+      <button type="button" class="add" id="add" hidden>Ajouter un cas</button>
+    </fieldset>
+
+    <button class="consult" type="submit" id="submit">Consulter l'oracle</button>
+    <p id="error" role="alert"></p>
+  </form>
+
+  <section id="verdict" hidden aria-live="polite">
+    <p class="asked" id="asked"></p>
+    <p id="answer"></p>
+    <ol id="ranking"></ol>
+    <p class="note">L'oracle (le modèle <a href="https://huggingface.co/convaiinnovations/laya-multilingual">Laya multilingual</a>,
+      quantifié en int8) choisit parmi les cas que tu proposes, en une seule lecture,
+      sans rien inventer. Ses pourcentages ne sont pas calibrés : il est souvent plus sûr de lui
+      qu'il ne devrait l'être, et il se trompe parfois sur des évidences, y compris face à un danger
+      grave. Ne t'en sers jamais pour décider de ta sécurité : en cas de doute, renonce, et en cas
+      d'urgence, appelle le 112.</p>
+  </section>
+</main>
+<script type="module">
+import * as ort from "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/ort.wasm.min.mjs";
+import { Tokenizer } from "https://cdn.jsdelivr.net/npm/@huggingface/tokenizers@0.2.0/dist/tokenizers.mjs";
+import { buildInput, decide, loadModelBytes, OracleError } from "./js/oracle.js";
+
+ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/";
+// GitHub Pages cannot send the COOP/COEP headers that WASM threads need.
+ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 1) : 1;
+
+const MAX = 12;
+const $ = (id) => document.getElementById(id);
+const list = $("options");
+let mode = "yesno";
+
+const YES_NO = [
+  ["Oui", "c'est clairement une bonne idée au vu de la situation"],
+  ["Non", "c'est une mauvaise idée, imprudente ou inutile au vu de la situation"],
+];
+
+function optionRow([label, meaning] = ["", ""]) {
+  const li = document.createElement("li");
+  const input = document.createElement("input");
+  input.type = "text"; input.maxLength = 200; input.value = label; input.className = "label";
+  input.placeholder = "Cas";
+  input.setAttribute("aria-label", "Cas possible");
+  const wrap = document.createElement("label");
+  wrap.className = "meaning-wrap";
+  const lead = document.createElement("span");
+  lead.textContent = "Choisir si…";
+  const m = document.createElement("input");
+  m.type = "text"; m.maxLength = 300; m.value = meaning; m.className = "meaning";
+  m.placeholder = "ce qui doit être vrai pour que ce soit le bon cas";
+  wrap.append(lead, m);
+  li.append(input);
+  if (mode === "custom") {
+    const rm = document.createElement("button");
+    rm.type = "button"; rm.className = "remove"; rm.textContent = "×";
+    rm.setAttribute("aria-label", "Retirer ce cas");
+    rm.onclick = () => { if (list.children.length > 2) { li.remove(); syncAdd(); } };
+    li.append(rm);
+  } else {
+    input.readOnly = true;
+    li.append(document.createElement("span"));
+  }
+  li.append(wrap);
+  return li;
+}
+function syncAdd() { $("add").hidden = mode !== "custom" || list.children.length >= MAX; }
+const EXAMPLES = [
+  {
+    "name": "Torrent en crue",
+    "context": "Retour de randonnée en fin de journée. Le torrent qu'on a traversé à gué le matin a gonflé avec la fonte des neiges : l'eau monte au-dessus des genoux, le courant est fort et trouble.",
+    "question": "Faut-il traverser maintenant ?",
+    "cases": [
+      [
+        "Oui",
+        "la traversée est sûre : eau basse, courant faible, fond visible"
+      ],
+      [
+        "Non",
+        "la traversée est dangereuse : eau haute, courant fort ou fond invisible"
+      ]
+    ]
+  },
+  {
+    "name": "Pente avalancheuse",
+    "context": "Sortie en ski de randonnée. Le bulletin d'avalanche indique un risque 4 sur 5 après 60 cm de neige fraîche et du vent. La pente devant nous fait 38° et nous avons entendu un « whoumpf » dans le manteau neigeux.",
+    "question": "Est-ce qu'on s'engage dans la pente ?",
+    "cases": [
+      [
+        "Oui",
+        "le manteau neigeux est stable et le risque d'avalanche est faible"
+      ],
+      [
+        "Non",
+        "le risque d'avalanche est élevé ou il y a des signes d'instabilité"
+      ]
+    ]
+  },
+  {
+    "name": "Mal des montagnes",
+    "context": "Trek en altitude, nous sommes à 4 200 m. Depuis ce matin, une personne du groupe a un fort mal de tête, des nausées et marche de façon instable.",
+    "question": "Que faisons-nous avec elle ?",
+    "cases": [
+      [
+        "Monter au camp suivant",
+        "la personne va bien et s'est acclimatée"
+      ],
+      [
+        "Redescendre",
+        "la personne présente des signes de mal aigu des montagnes qui s'aggravent"
+      ],
+      [
+        "Lui donner un antidouleur et continuer",
+        "les symptômes sont légers et sans signe de gravité"
+      ]
+    ]
+  },
+  {
+    "name": "Kayak et vent de terre",
+    "context": "Je voulais partir seul en kayak de mer ce matin. La météo annonce un vent de terre de force 6 qui se renforce dans la journée. Personne ne sait où je vais.",
+    "question": "Est-ce que je pars ?",
+    "cases": [
+      [
+        "Oui",
+        "les conditions sont calmes et la sortie est encadrée"
+      ],
+      [
+        "Non",
+        "le vent ou la mer rendent la sortie dangereuse"
+      ]
+    ]
+  }
+];
+
+function setMode(next, rows, focus = true) {
+  mode = next;
+  document.querySelectorAll(".modes button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
+  rows = rows || (mode === "yesno" ? YES_NO : [["", ""], ["", ""], ["", ""]]);
+  list.replaceChildren(...rows.map(optionRow));
+  syncAdd();
+  if (mode === "custom" && focus) list.querySelector(".label").focus();
+}
+const exampleBar = document.querySelector(".examples");
+EXAMPLES.forEach((ex, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.dataset.example = i; b.textContent = ex.name;
+  exampleBar.append(b);
+});
+document.querySelectorAll("[data-example]").forEach(b => b.onclick = () => {
+  const ex = EXAMPLES[Number(b.dataset.example)];
+  $("context").value = ex.context;
+  $("question").value = ex.question;
+  const yesNo = ex.cases.length === 2 && ex.cases[0][0] === "Oui" && ex.cases[1][0] === "Non";
+  setMode(yesNo ? "yesno" : "custom", ex.cases, false);
+  $("error").textContent = "";
+  $("submit").focus();
+});
+document.querySelectorAll(".modes button").forEach(b => b.onclick = () => setMode(b.dataset.mode));
+$("add").onclick = () => { const li = optionRow(); list.append(li); li.querySelector(".label").focus(); syncAdd(); };
+setMode("yesno");
+
+// ---- model: download once, keep the parts in the Cache API, verify every sha256 ----
+let engine = null, loading = null;
+const getJSON = async (path) => (await fetch(path)).json();
+
+async function cachedFetch(cache, file) {
+  const url = "model/" + file;
+  let res = cache ? await cache.match(url) : null;
+  if (!res) {
+    res = await fetch(url);
+    if (!res.ok) throw new OracleError(`Téléchargement impossible (${file} : HTTP ${res.status}).`);
+    if (cache) { try { await cache.put(url, res.clone()); } catch { /* quota: run without cache */ } }
+  }
+  return res.arrayBuffer();
+}
+
+async function openCache(manifest) {
+  const name = "decision-model-" + manifest.sha256.slice(0, 12);
+  try {
+    for (const key of await caches.keys()) if (key.startsWith("decision-model-") && key !== name) await caches.delete(key);
+    return await caches.open(name);
+  } catch { return null; }
+}
+
+function loadEngine() {
+  if (loading) return loading;
+  loading = (async () => {
+    $("load").hidden = true; $("progress").hidden = false;
+    $("engine-status").textContent = "Téléchargement du modèle…";
+    const [cfg, manifest, tokJson, tokCfg] = await Promise.all([
+      getJSON("model/config.json"), getJSON("model/MANIFEST.json"),
+      getJSON("model/tokenizer/tokenizer.json"), getJSON("model/tokenizer/tokenizer_config.json"),
+    ]);
+    const cache = await openCache(manifest);
+    const sha256 = async (buf) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", buf))]
+      .map((b) => b.toString(16).padStart(2, "0")).join("");
+    const bytes = await loadModelBytes(manifest, (f) => cachedFetch(cache, f), sha256, (done, total) => {
+      $("progress-fill").style.width = (100 * done / total).toFixed(1) + "%";
+      $("engine-status").textContent = `Téléchargement du modèle… ${Math.round(done / 1e6)} / ${Math.round(total / 1e6)} Mo`;
+    });
+    $("engine-status").textContent = "Préparation du modèle…";
+    const session = await ort.InferenceSession.create(bytes, { executionProviders: ["wasm"] });
+    engine = { cfg, session, tok: new Tokenizer(tokJson, tokCfg) };
+    $("progress").hidden = true;
+    document.querySelector(".engine").classList.add("ready");
+    $("engine-status").textContent = "Modèle prêt. Il tourne dans ton navigateur : rien de ce que tu écris ne quitte ta machine.";
+    return engine;
+  })().catch((err) => {
+    loading = null;
+    $("progress").hidden = true; $("load").hidden = false; $("load").textContent = "Réessayer le téléchargement";
+    $("engine-status").textContent = (err instanceof OracleError ? err.message : "Le modèle n'a pas pu être chargé : " + err.message)
+      + " Vérifie ta connexion, puis réessaie.";
+    throw err;
+  });
+  return loading;
+}
+$("load").onclick = () => loadEngine().catch(() => {});
+
+// Already downloaded on a previous visit: load it straight away.
+(async () => {
+  try {
+    const manifest = await getJSON("model/MANIFEST.json");
+    const cache = await caches.open("decision-model-" + manifest.sha256.slice(0, 12));
+    const hits = await Promise.all(manifest.parts.map((p) => cache.match("model/" + p.file)));
+    if (hits.every(Boolean)) loadEngine().catch(() => {});
+  } catch { /* no Cache API: wait for the button */ }
+})();
+
+$("form").onsubmit = async (e) => {
+  e.preventDefault();
+  const options = [...list.children]
+    .map(li => ({ label: li.querySelector(".label").value, meaning: li.querySelector(".meaning").value }));
+  const request = { question: $("question").value, context: $("context").value, options };
+  $("error").textContent = "";
+  const btn = $("submit");
+  btn.disabled = true;
+  try {
+    if (!engine) { btn.textContent = "Chargement du modèle…"; await loadEngine(); }
+    btn.textContent = "L'oracle pèse les cas…";
+    const input = buildInput(engine.tok, engine.cfg, request);
+    show(request.question.trim(), await decide(ort, engine.session, engine.cfg, input));
+  } catch (err) {
+    $("error").textContent = err instanceof OracleError ? err.message : "L'oracle n'a pas pu répondre : " + err.message;
+    if (!request.question.trim()) $("question").focus();
+  } finally {
+    btn.disabled = false; btn.textContent = "Consulter l'oracle";
+  }
+};
+
+function show(question, data) {
+  $("asked").textContent = question;
+  $("answer").textContent = data.answer;
+  const rows = data.ranking.map(r => {
+    const li = document.createElement("li");
+    const pct = Math.round(r.probability * 100);
+    li.innerHTML = '<div class="row"><span></span><span class="pct"></span></div><div class="bar"><div class="fill"></div></div>';
+    li.querySelector(".row span").textContent = r.answer;
+    li.querySelector(".pct").textContent = pct + " %";
+    li.dataset.w = (r.probability * 100).toFixed(1) + "%";
+    return li;
+  });
+  $("ranking").replaceChildren(...rows);
+  $("verdict").hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() =>
+    rows.forEach(li => li.querySelector(".fill").style.width = li.dataset.w)));
+  $("verdict").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+}
+</script>
+</body>
+</html>

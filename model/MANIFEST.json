@@ -1,0 +1,33 @@
+{
+  "source": {
+    "repo_id": "convaiinnovations/laya-multilingual",
+    "revision": "1720e3e",
+    "license": "Apache-2.0"
+  },
+  "format": "ONNX, weight-only int8 (per output channel, DequantizeLinear), fp32 activations",
+  "blob": "laya.int8.onnx",
+  "bytes": 334848938,
+  "sha256": "1002eaaaed50016fb642726f021cf3ccc9de0fe354aef315bfd6f59d78f5e278",
+  "parts": [
+    {
+      "file": "laya.int8.onnx.part00",
+      "bytes": 99614720,
+      "sha256": "16f8cac15a41cf70601294487c803b6f2a6e9b8887ed9b953f5d8e2b29d1f0f1"
+    },
+    {
+      "file": "laya.int8.onnx.part01",
+      "bytes": 99614720,
+      "sha256": "81208d98a3a045eb7c5857263e13c2e40fbaac759d925e6555fc9df31a5bca79"
+    },
+    {
+      "file": "laya.int8.onnx.part02",
+      "bytes": 99614720,
+      "sha256": "60c7fd92b24dee25b59244fdcb148087de5e4898c21ed4490be0d08070ace5fe"
+    },
+    {
+      "file": "laya.int8.onnx.part03",
+      "bytes": 36004778,
+      "sha256": "c20aa06a5c7876a6fb6747c7cfad1779f126a5fa3ac5df0da97c00be21d3c03e"
+    }
+  ]
+}

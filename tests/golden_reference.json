@@ -1,0 +1,424 @@
+[
+ {
+  "question": "Il pleut des cordes et j'ai oublié mon parapluie. Dois-je sortir faire un footing maintenant ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "c'est clairement une bonne idée au vu de la situation"
+   },
+   {
+    "label": "Non",
+    "meaning": "c'est une mauvaise idée, imprudente ou inutile au vu de la situation"
+   }
+  ],
+  "expected": "Non",
+  "probabilities": {
+   "Oui": 0.0328,
+   "Non": 0.9672
+  }
+ },
+ {
+  "question": "Mon colocataire a mangé mes restes trois fois cette semaine sans demander. Est-ce que je lui en parle ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "c'est clairement une bonne idée au vu de la situation"
+   },
+   {
+    "label": "Non",
+    "meaning": "c'est une mauvaise idée, imprudente ou inutile au vu de la situation"
+   }
+  ],
+  "expected": "Non",
+  "probabilities": {
+   "Oui": 0.0654,
+   "Non": 0.9346
+  }
+ },
+ {
+  "question": "J'ai une fuite d'eau sous l'évier qui inonde la cuisine. Qui dois-je appeler ?",
+  "options": [
+   {
+    "label": "Un plombier",
+    "meaning": "le problème concerne l'eau, les tuyaux ou une fuite"
+   },
+   {
+    "label": "Un électricien",
+    "meaning": "le problème concerne le courant, les prises ou le tableau électrique"
+   },
+   {
+    "label": "Un serrurier",
+    "meaning": "le problème concerne une serrure ou une porte bloquée"
+   },
+   {
+    "label": "Un jardinier",
+    "meaning": "le problème concerne les plantes ou le jardin"
+   }
+  ],
+  "expected": "Un plombier",
+  "probabilities": {
+   "Un plombier": 0.5638,
+   "Un électricien": 0.3166,
+   "Un serrurier": 0.0586,
+   "Un jardinier": 0.0609
+  }
+ },
+ {
+  "question": "Je dois rendre un dossier demain matin et il est 23h. Que faire ?",
+  "options": [
+   "Finir le dossier ce soir",
+   "Regarder une série",
+   "Partir en vacances"
+  ],
+  "expected": "Finir le dossier ce soir",
+  "probabilities": {
+   "Finir le dossier ce soir": 0.9869,
+   "Regarder une série": 0.0052,
+   "Partir en vacances": 0.0079
+  }
+ },
+ {
+  "question": "Quel plat servir à un ami végétarien ?",
+  "options": [
+   "Un gratin de légumes",
+   "Un steak frites",
+   "Un poulet rôti"
+  ],
+  "expected": "Un gratin de légumes",
+  "probabilities": {
+   "Un gratin de légumes": 0.5949,
+   "Un steak frites": 0.2429,
+   "Un poulet rôti": 0.1622
+  }
+ },
+ {
+  "question": "Should I accept a job offer that pays 30% more but requires a 3-hour daily commute?",
+  "options": [
+   "Yes",
+   "No"
+  ],
+  "expected": "Yes",
+  "probabilities": {
+   "Yes": 0.87,
+   "No": 0.13
+  }
+ },
+ {
+  "question": "My smoke detector keeps beeping every minute. What is the most likely cause?",
+  "options": [
+   "The battery is low",
+   "There is a ghost",
+   "The house is too clean"
+  ],
+  "expected": "The battery is low",
+  "probabilities": {
+   "The battery is low": 0.5075,
+   "There is a ghost": 0.2013,
+   "The house is too clean": 0.2913
+  }
+ },
+ {
+  "question": "Which season is best for skiing in the Alps?",
+  "options": [
+   "Winter",
+   "Summer",
+   "Autumn",
+   "Spring"
+  ],
+  "expected": "Summer",
+  "probabilities": {
+   "Winter": 0.2773,
+   "Summer": 0.3676,
+   "Autumn": 0.1909,
+   "Spring": 0.1641
+  }
+ },
+ {
+  "question": "¿Debo llevar abrigo si afuera hace dos grados bajo cero?",
+  "options": [
+   "Sí",
+   "No"
+  ],
+  "expected": "Sí",
+  "probabilities": {
+   "Sí": 0.6305,
+   "No": 0.3695
+  }
+ },
+ {
+  "question": "Ho la febbre alta da cinque giorni. Cosa devo fare?",
+  "options": [
+   "Consultare un medico",
+   "Correre una maratona",
+   "Ignorarla"
+  ],
+  "expected": "Consultare un medico",
+  "probabilities": {
+   "Consultare un medico": 0.813,
+   "Correre una maratona": 0.0145,
+   "Ignorarla": 0.1726
+  }
+ },
+ {
+  "question": "Soll ich bei Rot über die Ampel fahren, wenn niemand kommt?",
+  "options": [
+   "Ja",
+   "Nein"
+  ],
+  "expected": "Ja",
+  "probabilities": {
+   "Ja": 0.6048,
+   "Nein": 0.3952
+  }
+ },
+ {
+  "question": "Dois-je investir toutes mes économies dans une cryptomonnaie qu'un inconnu m'a conseillée sur Instagram ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "c'est clairement une bonne idée au vu de la situation"
+   },
+   {
+    "label": "Non",
+    "meaning": "c'est une mauvaise idée, imprudente ou inutile au vu de la situation"
+   },
+   "Seulement la moitié"
+  ],
+  "expected": "Oui",
+  "probabilities": {
+   "Oui": 0.3849,
+   "Non": 0.3535,
+   "Seulement la moitié": 0.2616
+  }
+ },
+ {
+  "question": "Je pars en randonnée en montagne. Que dois-je emporter en priorité ?",
+  "options": [
+   "De l'eau et une veste",
+   "Un fer à repasser",
+   "Un aquarium"
+  ],
+  "context": "Randonnée de 6 heures, météo incertaine en altitude.",
+  "expected": "De l'eau et une veste",
+  "probabilities": {
+   "De l'eau et une veste": 0.703,
+   "Un fer à repasser": 0.2218,
+   "Un aquarium": 0.0752
+  }
+ },
+ {
+  "question": "Faut-il arroser les tomates aujourd'hui ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "c'est clairement une bonne idée au vu de la situation"
+   },
+   {
+    "label": "Non",
+    "meaning": "c'est une mauvaise idée, imprudente ou inutile au vu de la situation"
+   }
+  ],
+  "context": "Il a plu abondamment toute la nuit et la terre est détrempée.",
+  "expected": "Non",
+  "probabilities": {
+   "Oui": 0.112,
+   "Non": 0.888
+  }
+ },
+ {
+  "context": "Appartement au 3e étage, samedi soir. De l'eau coule sous l'évier de la cuisine et le sol est trempé.",
+  "question": "Qui dois-je appeler en urgence ?",
+  "options": [
+   {
+    "label": "Un plombier",
+    "meaning": "le problème concerne l'eau, les tuyaux ou une fuite"
+   },
+   {
+    "label": "Un électricien",
+    "meaning": "le problème concerne le courant, les prises ou le tableau électrique"
+   },
+   {
+    "label": "Un serrurier",
+    "meaning": "le problème concerne une serrure ou une porte bloquée"
+   }
+  ],
+  "expected": "Un plombier",
+  "probabilities": {
+   "Un plombier": 0.6152,
+   "Un électricien": 0.3298,
+   "Un serrurier": 0.055
+  }
+ },
+ {
+  "context": "Il a plu abondamment toute la nuit et la terre du potager est détrempée.",
+  "question": "Faut-il arroser les tomates aujourd'hui ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "c'est clairement une bonne idée au vu de la situation"
+   },
+   {
+    "label": "Non",
+    "meaning": "c'est une mauvaise idée, imprudente ou inutile au vu de la situation"
+   }
+  ],
+  "expected": "Non",
+  "probabilities": {
+   "Oui": 0.0585,
+   "Non": 0.9415
+  }
+ },
+ {
+  "context": "Randonnée en montagne, 14h. Nous sommes à 300 m de dénivelé du sommet, sur une arête exposée. Le ciel noircit à l'ouest, on entend le tonnerre au loin et la météo annonçait des orages l'après-midi.",
+  "question": "Que faisons-nous ?",
+  "options": [
+   {
+    "label": "Continuer vers le sommet",
+    "meaning": "le temps reste stable et le groupe a de la marge"
+   },
+   {
+    "label": "Faire demi-tour",
+    "meaning": "un orage approche et l'itinéraire expose le groupe à la foudre"
+   },
+   {
+    "label": "S'arrêter sur l'arête pour attendre",
+    "meaning": "l'abri est sûr et le danger va passer rapidement"
+   }
+  ],
+  "expected": "S'arrêter sur l'arête pour attendre",
+  "probabilities": {
+   "Continuer vers le sommet": 0.3163,
+   "Faire demi-tour": 0.2778,
+   "S'arrêter sur l'arête pour attendre": 0.4059
+  }
+ },
+ {
+  "context": "Retour de randonnée en fin de journée. Le torrent qu'on a traversé à gué le matin a gonflé avec la fonte des neiges : l'eau monte au-dessus des genoux, le courant est fort et trouble.",
+  "question": "Faut-il traverser maintenant ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "la traversée est sûre : eau basse, courant faible, fond visible"
+   },
+   {
+    "label": "Non",
+    "meaning": "la traversée est dangereuse : eau haute, courant fort ou fond invisible"
+   }
+  ],
+  "expected": "Non",
+  "probabilities": {
+   "Oui": 0.4085,
+   "Non": 0.5915
+  }
+ },
+ {
+  "context": "Sortie en ski de randonnée. Le bulletin d'avalanche indique un risque 4 sur 5 après 60 cm de neige fraîche et du vent. La pente devant nous fait 38° et nous avons entendu un « whoumpf » dans le manteau neigeux.",
+  "question": "Est-ce qu'on s'engage dans la pente ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "le manteau neigeux est stable et le risque d'avalanche est faible"
+   },
+   {
+    "label": "Non",
+    "meaning": "le risque d'avalanche est élevé ou il y a des signes d'instabilité"
+   }
+  ],
+  "expected": "Non",
+  "probabilities": {
+   "Oui": 0.4723,
+   "Non": 0.5277
+  }
+ },
+ {
+  "context": "Randonnée seul. Un brouillard épais est tombé, j'ai perdu le sentier depuis une heure. La nuit tombe dans deux heures, il fait 4 °C, mon téléphone est à 15 % mais capte encore.",
+  "question": "Que dois-je faire ?",
+  "options": [
+   {
+    "label": "Continuer à chercher le sentier",
+    "meaning": "la visibilité permet de s'orienter et le temps ne presse pas"
+   },
+   {
+    "label": "Rester sur place et appeler les secours",
+    "meaning": "on est perdu, la situation se dégrade et on peut encore joindre les secours"
+   },
+   {
+    "label": "Descendre tout droit dans la pente",
+    "meaning": "le terrain en contrebas est connu et sans danger"
+   }
+  ],
+  "expected": "Continuer à chercher le sentier",
+  "probabilities": {
+   "Continuer à chercher le sentier": 0.7365,
+   "Rester sur place et appeler les secours": 0.1784,
+   "Descendre tout droit dans la pente": 0.0852
+  }
+ },
+ {
+  "context": "Trek en altitude, nous sommes à 4 200 m. Depuis ce matin, une personne du groupe a un fort mal de tête, des nausées et marche de façon instable.",
+  "question": "Que faisons-nous avec elle ?",
+  "options": [
+   {
+    "label": "Monter au camp suivant",
+    "meaning": "la personne va bien et s'est acclimatée"
+   },
+   {
+    "label": "Redescendre",
+    "meaning": "la personne présente des signes de mal aigu des montagnes qui s'aggravent"
+   },
+   {
+    "label": "Lui donner un antidouleur et continuer",
+    "meaning": "les symptômes sont légers et sans signe de gravité"
+   }
+  ],
+  "expected": "Redescendre",
+  "probabilities": {
+   "Monter au camp suivant": 0.2121,
+   "Redescendre": 0.6812,
+   "Lui donner un antidouleur et continuer": 0.1066
+  }
+ },
+ {
+  "context": "Je voulais partir seul en kayak de mer ce matin. La météo annonce un vent de terre de force 6 qui se renforce dans la journée. Personne ne sait où je vais.",
+  "question": "Est-ce que je pars ?",
+  "options": [
+   {
+    "label": "Oui",
+    "meaning": "les conditions sont calmes et la sortie est encadrée"
+   },
+   {
+    "label": "Non",
+    "meaning": "le vent ou la mer rendent la sortie dangereuse"
+   }
+  ],
+  "expected": "Non",
+  "probabilities": {
+   "Oui": 0.4287,
+   "Non": 0.5713
+  }
+ },
+ {
+  "context": "Soirée d'hiver à la maison, la chaudière à gaz tourne. Toute la famille a mal à la tête et des nausées, et le détecteur de monoxyde de carbone sonne.",
+  "question": "Que faisons-nous ?",
+  "options": [
+   {
+    "label": "Sortir et appeler les secours",
+    "meaning": "il y a des signes d'intoxication au monoxyde de carbone"
+   },
+   {
+    "label": "Prendre un antidouleur et se coucher",
+    "meaning": "il s'agit d'une simple fatigue sans danger"
+   },
+   {
+    "label": "Couper l'alarme et attendre",
+    "meaning": "l'alarme est un faux déclenchement évident"
+   }
+  ],
+  "expected": "Couper l'alarme et attendre",
+  "probabilities": {
+   "Sortir et appeler les secours": 0.0899,
+   "Prendre un antidouleur et se coucher": 0.0833,
+   "Couper l'alarme et attendre": 0.8268
+  }
+ }
+]
