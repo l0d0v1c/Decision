@@ -8,6 +8,8 @@ Tu décris le **contexte**, tu poses une **question**, tu listes les **cas** pos
 chacun, quand il faut le choisir (« Choisir si… »). L'oracle pèse ces critères et renvoie le cas
 retenu avec un pourcentage pour chacun. Rien de ce que tu écris ne quitte ta machine : le modèle
 est téléchargé une fois (335 Mo), gardé en cache, puis exécuté localement en WebAssembly sur le CPU.
+La page ne dépend d'aucun site tiers : bibliothèques, moteur WebAssembly, polices et modèle sont
+tous servis depuis ce dépôt.
 
 ## Le modèle
 
@@ -44,7 +46,13 @@ npm test
 
 | chemin | rôle |
 |---|---|
-| `index.html` | la page (onnxruntime-web 1.30.0 et @huggingface/tokenizers 0.2.0 depuis jsDelivr) |
+| `index.html` | la page |
 | `js/oracle.js` | validation, construction de l'entrée du modèle (identique à laya), inférence |
 | `model/` | modèle ONNX int8 en morceaux, tokenizer, configuration, manifeste |
+| `vendor/onnxruntime-web/` | onnxruntime-web 1.30.0 (module WASM et moteur), licence MIT |
+| `vendor/tokenizers/` | @huggingface/tokenizers 0.2.0, licence Apache 2.0 |
+| `vendor/fonts/` | Public Sans et Spectral (sous-ensembles latins), licence SIL OFL 1.1 |
 | `tests/` | harnais golden et références PyTorch |
+
+Les fichiers de `vendor/` sont identiques à ceux des paquets npm de `package.json`, que le
+harnais de test exécute.
